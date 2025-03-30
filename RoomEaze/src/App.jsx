@@ -1,9 +1,10 @@
 import "./App.css";
+import Bulletin from "./pages/bulletin/Bulletin";
 
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Bulletin />
     </>
   );
 }
