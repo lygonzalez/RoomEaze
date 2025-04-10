@@ -1,11 +1,18 @@
-/* import "./App.css";
-import Bulletin from "./pages/bulletin/Bulletin";
+import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";}
+          <nav>
+            <Link to="/" style={{ marginRight: "15px" }}>Bulletin</Link>
+            <Link to="/calendar">Calendar</Link>
+          </nav>
 
-function App() {
-  return (
-    <>
-      <Bulletin />
-    </>
+          {/* Route Definitions */}
+          <Routes>
+            <Route path="/" element={<Bulletin />} />
+            <Route path="/calendar" element={<MyScheduler />} />
+          </Routes>
+        </div>
+      </Router>
   );
 }
 

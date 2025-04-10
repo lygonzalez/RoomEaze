@@ -1,0 +1,108 @@
+/*---------------------CALENDER STYLING-------------*/
+/*.rbc-calendar {
+    background-color: #E0F7FA; Very light blue 
+    border-radius: 10px;
+    padding: 10px;
+  } */
+/* Darken grid lines for month view */
+.rbc-month-view {
+    border: 1px solid #444 !important; /* Outer border of the month view */
+  }
+  
+  /* Darken day separators */
+  .rbc-day-bg {
+    border-right: 1px solid #444 !important; /* Vertical lines between days */
+  }
+  
+
+  /* Week and Day View Borders */
+  .rbc-time-view,
+  .rbc-agenda-view {
+    border: 1px solid #444 !important; /* Outer border for week/day views */
+  }
+  
+  /* Darken time slot lines in week and day views */
+  .rbc-time-slot {
+    border-top: 1px solid #444 !important; /* Lines between time slots */
+  }
+  
+  /* Darken lines in time headers (week/day) */
+  .rbc-time-header-cell,
+  .rbc-time-header-content {
+    border-bottom: 1px solid #444 !important; /* Header line at the top */
+  }
+  
+  /* Darken the border around the current date */
+  .rbc-today {
+    background-color: #FFF5F5 !important; /* Soft pink to highlight today */
+    border: 1px solid #ff69b4 !important; /* Pink border for today's date */
+  }
+
+/* =------- button styling -------------- */
+.view-button {
+    padding: 10px 15px;  /* Adds padding to the button */
+    border: none;
+    border-radius: 25px; /* This makes the button oval */
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s ;
+    display: inline-block; /* Ensures buttons are displayed in a row */
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  .view-button-month {
+    background-color: #8abce5; /* Yellow */
+    color: #fff;
+  }
+  .view-button-month:hover {
+    background-color: #70a9d7; 
+  }
+  .view-button-week {
+    background-color: #8abce5; 
+    color: #fff;
+  }
+  .view-button-week:hover {
+    background-color: #70a9d7; /* Slightly darker blue on hover */
+  }
+  .view-button-day {
+    background-color: #8abce5; 
+    color: #fff;
+  }
+  .view-button-day:hover {
+    background-color: #70a9d7; 
+  }
+  
+  .view-button-back {
+    background-color: #8abce5; /* Steel blue */
+  }
+  .view-button-back:hover {
+    background-color: #70a9d7;
+  }
+  .view-button-next {
+    background-color: #8abce5; /* Steel blue */
+  }
+  .view-button-next:hover {
+    background-color: #70a9d7;
+  }
+  /* Hover effect for all buttons */
+  .view-button:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  .view-button:active {
+    background-color: #3b82c1; /* Darker blue when clicked */
+  }
+  
+  .view-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(100, 149, 237, 0.8); /* Blue outline when focused */
+  }
+
+  .month-year-display {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+  }
