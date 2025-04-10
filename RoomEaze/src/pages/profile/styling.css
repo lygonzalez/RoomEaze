@@ -1,0 +1,54 @@
+.container {
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top-half {
+    background-color: #B9DDE3; /* Change this color */
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bottom-half {
+    background-color: #fdfde4; /* Second half */
+    height: 50%;
+  }
+  
+  .color-choice-bar {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 0.1rem;
+    background-color: #d9d9d9;
+    border-radius: 1rem;
+    outline: none;
+    color: #979dab;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .small-circles {
+    width: 50px;
+    height: 50px;
+    background-color: pink;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+
+  .color-bar-wrapper {
+    width: 100px;            /* or any fixed width */
+    margin: 0 auto;  
+    height: 50px;
+    background-color: lightgray;   
+    border-radius: 1rem;     /* center it horizontally */
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    border: none;
+    padding: 0.1rem;
+  }
+  
+  
