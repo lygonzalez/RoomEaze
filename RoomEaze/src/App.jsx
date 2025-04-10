@@ -1,13 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Bulletin from "./pages/bulletin/Bulletin";
-import MyScheduler from "./pages/calender/scheduler"; // Make sure this import is correct!
-function App() {
-  return (
-    <Router>
-        <div style={{ padding: "20px" }}>
-          {/* Navigation Links */}
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";}
           <nav>
             <Link to="/" style={{ marginRight: "15px" }}>Bulletin</Link>
             <Link to="/calendar">Calendar</Link>
@@ -20,6 +13,31 @@ function App() {
           </Routes>
         </div>
       </Router>
+  );
+}
+
+export default App; */
+
+
+
+import "./App.css";
+import Navbar from "./navbar";  // Import Navbar
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Profile from "./pages/profile/Profile";  // Your profile component
+import Bulletin from "./pages/bulletin/bulletin";  // The new page you want to add
+import Edit from "./pages/profile/editProfile";  // The new page you want to add
+
+
+function App() {
+  return (
+     <Router>
+       <Navbar />
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/bulletin" element={<Bulletin />} />
+        <Route path="/profile/editProfile" element={<Edit />} />
+      </Routes>
+    </Router> 
   );
 }
 
