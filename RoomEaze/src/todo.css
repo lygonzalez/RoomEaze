@@ -1,0 +1,168 @@
+
+.todo-container {
+  background-color:#FDFDE4;  
+  text-align: center;
+  margin:0;
+  padding:0;
+  width:100vw;
+  height:100vw;
+}
+
+.heading {
+  font-family: 'Kavoon', cursive;
+  font-weight: bold;
+  text-align: left;
+  color:black;
+  font-size:40px;
+  margin-bottom:20px;
+  padding-top:100px;
+  padding-left:120px;
+}
+
+.card {
+  background-color:#FDFDE4;
+  padding:15px;
+  border-radius:10px;
+}
+
+.roommate-name{
+  font-family: 'Kavoon', cursive;
+  font-weight: bold;
+  color:black;
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.chore-list {
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+  list-style:none;
+  padding:0;
+  color:black;
+  font-size:24px;
+}
+
+.noTasks{
+  color:rgb(96, 93, 93);
+  font-size:24px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+}
+
+.addTaskButton {
+  margin-top: 30px;
+  padding:10px 15px;
+  font-size:24px;
+  background:#B9DDE3;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-family: 'Kavoon', cursive;
+  font-weight: bold;
+}
+
+.addTaskButton:hover {
+  background:#168498;
+}
+
+.modal {
+  font-family: 'Kavoon', cursive;
+  font-weight: bold;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:#FDFDE4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-content {
+  background-color:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  font-family: 'Karla', sans-serif;
+  font-weight: 400;
+}
+
+.chore-input {
+  width:80%;
+  padding:8px;
+  margin:10px 0;
+  border-radius:5px;
+  border-color:gray;
+}
+
+.roommate-select {
+  width:80%;
+  padding:8px;
+  margin:10px 0;
+  border-radius:5px;
+  border-color:gray;
+}
+
+.frequencySelect {
+  width:80%;
+  padding:8px;
+  margin:10px 0;
+  border-radius:5px;
+  border-color:gray;
+}
+
+.modal-buttons{
+  display:flex;
+  justify-content:space-around;
+  margin-top:10px;
+}
+
+.submitButton {
+  background-color:#B9DDE3;
+  padding:8px 12px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.closeButton {
+  background-color:white;
+  padding:8px 12px;
+  border-color:black;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.submitButton:hover {
+  background-color:#168498;
+}
+
+.closeButton.hover {
+  background-color:lightgray;
+}
+
+.roommate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .roommate-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.card {
+  background-color: #FDFDE4;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
