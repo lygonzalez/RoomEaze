@@ -11,8 +11,9 @@ function Navbar() {
         <li><Link to="/profile/editProfile">Edit</Link></li>
         <li><Link to="/calender/scheduler">Schedule</Link></li>
         <li><Link to="/todolist/todo">To-Do List</Link></li>
-        <li><Link to="/home">Home</Link></li>
-        <li><Link to="/src/pages/landing-page/landing-page.jsx">Sign out</Link></li>
+        <li><Link to="/openingscreen">Opening Screen</Link></li>
+        <li><Link to="/signup">Sign Up Page</Link></li>
+        <li><Link to="/App">Home</Link></li>
       </ul>
     </nav>
   );
