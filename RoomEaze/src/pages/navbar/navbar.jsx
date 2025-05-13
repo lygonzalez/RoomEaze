@@ -18,14 +18,14 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">RoomEaze</div>
+      <div className="navbar-logo">
+        <Link to="/home">Roomeaze</Link>
+      </div>
       <ul className="navbar-links">
         <li><Link to="/profile">Profile</Link></li>
         <li><Link to="/bulletin">Bulletin</Link></li>
         <li><Link to="/calender/scheduler">Schedule</Link></li>
         <li><Link to="/todolist/todo">To-Do List</Link></li>
-        <li><Link to="/">Opening Screen</Link></li>
-        <li><Link to="/signup">Sign Up</Link></li>
         {userLoggedIn ? (
           <li>
             <button onClick={handleLogout} className="logout-button">

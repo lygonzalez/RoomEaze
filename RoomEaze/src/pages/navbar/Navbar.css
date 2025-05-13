@@ -18,9 +18,25 @@
     font-weight: bold;
     color: white;
   }
+
+  .navbar-logo a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-logo a:hover {
+    color: #FED4C1; /* soft peach or your accent color */
+  }
+  
+  .navbar li {
+    display: flex;
+    align-items: center;
+  }
   
   .navbar-links {
     display: flex;
+    align-items: center;
     gap: 1.5rem;
     list-style: none;
     margin: 0;
@@ -45,3 +61,27 @@
   .navbar-links li:last-child {
     margin-right: 3rem;
   }
+
+  .logout-button {
+    background-color: white;
+    color: #61AFBD;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.4rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #FED4C1;
+    color: white;
+  }
+  
