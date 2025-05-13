@@ -15,22 +15,20 @@ import SignIn from "./pages/signin/signin";
 
 function App() {
   const location = useLocation();
-
+  const noNavbarRoutes = ["/", "/signup", "/signin", "/openingscreen"];
   return (
-   <>
-    {location.pathname !== "/" && <Navbar />}
- 
+    <>
+      {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
    <Routes>
     <Route path="/" element={<OpeningScreen />} />
-    {/* <Route path="/home" element={<Home />} /> */}
-    <Route path="/profile" element={<Profile />} />
-    <Route path="/bulletin" element={<Bulletin />} />
-    <Route path="/profile/editProfile" element={<Edit />} />
-    <Route path="/calender/scheduler" element={<MyScheduler />}/>
-    <Route path="/todolist/todo" element={<Todo />}/>
-    {/* <Route path="/openingscreen" element={<OpeningScreen />}/> */}
-    <Route path="/signup" element={<SignupPage />} />
-    <Route path="/signin" element={<SignIn />}/>
+    <Route path="/openingscreen" element={<OpeningScreen />} />
+   <Route path="/profile" element={<Profile />} />
+     <Route path="/bulletin" element={<Bulletin />} />
+     <Route path="/profile/editProfile" element={<Edit />} />
+     <Route path="/calender/scheduler" element={<MyScheduler />}/>
+     <Route path="/todolist/todo" element={<Todo />}/>
+     <Route path="/signup" element={<SignupPage />} />
+     <Route path="/signin" element={<SignIn />}/>
    </Routes>
    </>
   );

@@ -1,10 +1,15 @@
 .navbar {
+    position: fixed;        /* Keeps it pinned at the top */
+    top: 0;                 /* Remove spacing from top */
+    left: 0;                /* Remove spacing from left */
+    width: 100%;            /* Full screen width */
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #366a6a; /* your preferred teal/navy */
+    background-color: #61AFBD; /* your preferred teal/navy */
     padding: 1rem 2rem;
-    font-family: 'Playpen Sans', cursive; /* or any font you're using */
+    font-family: 'Fredoka', sans-serif;
     color: white;
   }
   
@@ -20,6 +25,10 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    max-width: 100%;
+    overflow-x: auto;
   }
   
   .navbar-links li a {
@@ -30,5 +39,9 @@
   }
   
   .navbar-links li a:hover {
-    color: #ffdab9; /* soft peach or your accent color */
+    color: #FED4C1; /* soft peach or your accent color */
+  }
+
+  .navbar-links li:last-child {
+    margin-right: 3rem;
   }

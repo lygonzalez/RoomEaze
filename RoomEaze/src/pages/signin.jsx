@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 import styled from 'styled-components';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase';
-import { Navigate, useNavigate } from 'react-router-dom';
-import {useAuth}  from '../../authContext';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContainer = styled.div`
   display: flex;
@@ -15,7 +14,7 @@ const AuthContainer = styled.div`
   padding: 20px;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   background-color: #f5f5dc;
   padding: 30px;
   border-radius: 8px;
@@ -59,70 +58,43 @@ const ErrorMessage = styled.p`
   margin-top: 10px;
 `;
 
-const SignupPage = () => {
-  console.log('SignupPage is rendering');
-  const [name, setName] = useState('');
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {userLoggedIn} = useAuth()
   const navigate = useNavigate();
 
-  const handleSignUp = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    setError('');
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      await updateProfile(user, { displayName: name });
-      await setDoc(doc(db, 'users', user.uid), {
-        uid: user.uid,
-        name: name,
-        email: email,
-        groupId: null,  // We'll add this later
-        createdAt: new Date()
-      });
-      navigate('/openingscreen');
-    } catch (error) {
-      setError(error.message);
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/profile');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
-  if (userLoggedIn) {
-    return <Navigate to="/home" replace />;
-  }
-
   return (
     <AuthContainer>
-      <Form onSubmit={handleSignUp}>
-        <Title>Welcome!</Title>
-        <Input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+      <Form onSubmit={handleSignIn}>
+        <Title>Sign In</Title>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <Input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <Input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <Button type="submit">Sign Up</Button>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <p style={{ marginTop: '10px', textAlign: 'center', fontSize: '0.9em', color: '#555' }}>
-          Already have an account? <a href="/signin" style={{ color: '#4682b4' }}>Sign In</a>
-        </p>
+        <Button type="submit">Sign In</Button>
       </Form>
     </AuthContainer>
   );
-};
-
-export default SignupPage;
-
+}

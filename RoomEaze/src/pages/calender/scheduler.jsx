@@ -88,7 +88,7 @@ const MyScheduler = () => {
 const monthYear = moment(date).format("MMMM YYYY");
 
  return (
-   <div style={{ height: 700, margin: "50px" }}>
+   <div style={{ height: 700, margin: "50px", paddingTop: 0 }}>
      <h2>Roommate Chore & Event Scheduler</h2>
 
      {/* View Controls */}

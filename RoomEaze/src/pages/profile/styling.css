@@ -3,19 +3,61 @@
     display: flex;
     flex-direction: column;
   }
-  
+
+  body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
   .top-half {
-    background-color: #B9DDE3; /* Change this color */
     height: 50%;
+    width:100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
-  .bottom-half {
-    background-color: #fdfde4; /* Second half */
-    height: 50%;
+
+  .edit-profile-page {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Fredoka', sans-serif;
   }
+  
+  .edit-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .edit-fields input[type="text"] {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 300px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  
+  .save-button {
+    width: 100px;
+    height: 40px;
+    background-color: #61AFBD;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background-color: #468da1;
+  }  
+  
   
   .color-choice-bar {
     display: flex;
@@ -30,25 +72,20 @@
     margin-bottom: 1rem;
   }
 
-  .small-circles {
-    width: 50px;
-    height: 50px;
-    background-color: pink;
-    border-radius: 50%;
-    margin: 0 auto;
-  }
-
   .color-bar-wrapper {
-    width: 100px;            /* or any fixed width */
-    margin: 0 auto;  
-    height: 50px;
-    background-color: lightgray;   
-    border-radius: 1rem;     /* center it horizontally */
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    align-items: center;
-    border: none;
-    padding: 0.1rem;
+    display: flex;
+    flex-direction: row;    /* horizontal layout */
+    flex-wrap: wrap;        /* allows wrapping on small screens */
+    justify-content: center;
+    gap: 0.5rem;            /* space between circles */
+    margin-top: 1rem;
+  }
+  
+  .small-circles {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
   }
   
   

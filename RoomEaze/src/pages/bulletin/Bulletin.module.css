@@ -2,6 +2,7 @@ body {
   background-color: var(--baby-yellow);
   margin: 3rem;
   text-align: center;
+  padding-top: 70px;
 }
 
 .dashboard-post-button {
