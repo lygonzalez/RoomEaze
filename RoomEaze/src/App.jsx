@@ -10,8 +10,8 @@ import Todo from "./pages/todolist/todo";
 import OpeningScreen from "./pages/openingscreen";
 import SignupPage from "./pages/signup/signup";
 import SignIn from "./pages/signin/signin";
-   
-
+import Home from "./pages/home/Home";
+  
 
 function App() {
   const location = useLocation();
@@ -29,6 +29,7 @@ function App() {
      <Route path="/todolist/todo" element={<Todo />}/>
      <Route path="/signup" element={<SignupPage />} />
      <Route path="/signin" element={<SignIn />}/>
+     <Route path="/home" element={<Home />} />
    </Routes>
    </>
   );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import "./todo.css"
 
+
 export default function TaskModal({roommates, onClose, onAddTask}) {
     const[taskName, setTaskName] = useState("");
     const[selectedRoommate, setSelectedRoommate] = useState(roommates[0]);

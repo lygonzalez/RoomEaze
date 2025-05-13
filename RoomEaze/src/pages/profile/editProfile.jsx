@@ -4,15 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import {
   doc,
   getDoc,
+  getDocs,
   updateDoc,
   serverTimestamp,
   arrayUnion,
-  setDoc
+  setDoc,
+  collection,
+  query,
+  where
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 
 import CircleChoice from "./profile_color"; 
 import "./styling.css";
+
 
   
 const editProfile = () => {
@@ -22,6 +27,7 @@ const editProfile = () => {
   const [joinCode, setJoinCode] = useState('');
   const [newGroupName, setNewGroupName] = useState('');
   const [error, setError] = useState('');
+  const [groupMembers, setGroupMembers] = useState([]);
 
   const user = auth.currentUser;
   const navigate = useNavigate();
@@ -34,13 +40,30 @@ const editProfile = () => {
       if (docSnap.exists()) {
         const data = docSnap.data();
         setName(data.name || "");
-        setGroup(data.groupId || "");
+        setGroup(data.groupId || "");         
         setColor(data.profileColor || "#B9DDE3");
       }
     };
 
     fetchData();
   }, [user]);
+
+  useEffect(() => {
+    const fetchGroupMembers = async () => {
+      if (!group) return;
+      const membersQuery = query(
+        collection(db, "users"),
+        where("groupId", "==", group)
+      );
+      const membersSnap = await getDocs(membersQuery);
+      const names = membersSnap.docs.map((doc) => doc.data().name || "Unnamed");
+      setGroupMembers(names);
+      console.log("Fetched roommates:", names); // Debug log
+    };
+  
+    fetchGroupMembers();
+  }, [group]);
+  
 
   const handleSave = async () => {
     if (!user) return;
@@ -140,9 +163,20 @@ const editProfile = () => {
     {error && <p style={{ color: "red" }}>{error}</p>}
     </>
     ) : (
-    <div>
+        <div>
         <h2>You’re in group: {group}</h2>
-    </div>
+        {groupMembers.length > 0 ? (
+            <div style={{ marginTop: "0.2rem", textAlign: "center" }}>
+                <h4>
+                    Roommates: {groupMembers.join(", ")}
+                </h4>
+            </div>
+            ) : (
+            <p style={{ fontSize: "0.9rem", color: "#777" }}>
+                No roommates found in your group yet.
+            </p>
+            )}
+        </div>
     )}
         <div>
           <h2>Change Profile Color</h2>
