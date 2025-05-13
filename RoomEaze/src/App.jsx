@@ -8,26 +8,31 @@ import Navbar from "./pages/navbar/navbar";  // Import Navbar
 import MyScheduler from "./pages/calender/scheduler";
 import Todo from "./pages/todolist/todo";
 import OpeningScreen from "./pages/openingscreen";
-import SignupPage from "./pages/signup";
-import SignIn from "./pages/signin";
+import SignupPage from "./pages/signup/signup";
+import SignIn from "./pages/signin/signin";
    
+
+
 function App() {
+  const location = useLocation();
+
   return (
-    <>
-      {location.pathname !== "/" && <Navbar />}
+   <>
+    {location.pathname !== "/" && <Navbar />}
+ 
    <Routes>
-    <Route path="/" element={<LandingPage />} />
-    <Route path="/home" element={<Home />} />
-   <Route path="/profile" element={<Profile />} />
-     <Route path="/bulletin" element={<Bulletin />} />
-     <Route path="/profile/editProfile" element={<Edit />} />
-     <Route path="/calender/scheduler" element={<MyScheduler />}/>
-     <Route path="/todolist/todo" element={<Todo />}/>
-     <Route path="/openingscreen" element={<OpeningScreen />}/>
-     <Route path="/signup" element={<SignupPage />} />
-     <Route path="/signin" element={<SignIn />}/>
+    <Route path="/" element={<OpeningScreen />} />
+    {/* <Route path="/home" element={<Home />} /> */}
+    <Route path="/profile" element={<Profile />} />
+    <Route path="/bulletin" element={<Bulletin />} />
+    <Route path="/profile/editProfile" element={<Edit />} />
+    <Route path="/calender/scheduler" element={<MyScheduler />}/>
+    <Route path="/todolist/todo" element={<Todo />}/>
+    {/* <Route path="/openingscreen" element={<OpeningScreen />}/> */}
+    <Route path="/signup" element={<SignupPage />} />
+    <Route path="/signin" element={<SignIn />}/>
    </Routes>
- </Router> 
+   </>
   );
 }
 

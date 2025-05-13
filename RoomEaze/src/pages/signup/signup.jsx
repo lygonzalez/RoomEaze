@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase';
+import { Navigate, useNavigate } from 'react-router-dom';
+import {useAuth}  from '../../authContext';
 
 const AuthContainer = styled.div`
   display: flex;
@@ -64,6 +65,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const {userLoggedIn} = useAuth()
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -79,9 +81,13 @@ const SignupPage = () => {
     }
   };
 
+  if (userLoggedIn) {
+    return <Navigate to="/home" replace />;
+  }
+
   return (
     <AuthContainer>
-      <Form>
+      <Form onSubmit={handleSignUp}>
         <Title>Welcome!</Title>
         <Input
           type="text"
@@ -101,7 +107,7 @@ const SignupPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button onClick={handleSignUp}>Sign Up</Button>
+        <Button type="submit">Sign Up</Button>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <p style={{ marginTop: '10px', textAlign: 'center', fontSize: '0.9em', color: '#555' }}>
           Already have an account? <a href="/signin" style={{ color: '#4682b4' }}>Sign In</a>
