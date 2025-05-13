@@ -10,6 +10,7 @@ const HalfColoredPage = () => {
   const [name, setName] = useState("Loading...");
   const [groupName, setGroupName] = useState("");
   const [color, setColor] = useState("#B9DDE3");
+  const [groupId, setGroupId] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -20,16 +21,32 @@ const HalfColoredPage = () => {
   
       const userRef = doc(db, "users", user.uid);
       const userSnap = await getDoc(userRef);
+  
       if (userSnap.exists()) {
         const data = userSnap.data();
         setName(data.name || user.displayName || "Unnamed");
-        setGroupName(data.groupId || "No group");
         setColor(data.profileColor || "#B9DDE3");
+  
+        const groupId = data.groupId;
+        if (groupId) {
+          const groupRef = doc(db, "groups", groupId);
+          const groupSnap = await getDoc(groupRef);
+          if (groupSnap.exists()) {
+            const groupData = groupSnap.data();
+            setGroupName(groupData.name);
+            setGroupId(groupId);
+          } else {
+            setGroupName("Group not found");
+          }
+        } else {
+          setGroupName("No group");
+        }
       }
     };
   
     fetchUserData();
   }, []);
+  
   
 
   const circleStyle = {
@@ -58,7 +75,11 @@ const HalfColoredPage = () => {
             minWidth: "200px",
           }}
         >
-          <h3 style={{ margin: 0 }}>{groupName}</h3>
+          <h3 style={{ margin: "0 0 0.3rem 0" }}>{groupName}</h3>
+          <p style={{ margin: 0, fontSize: "0.85rem", color: "#555" }}>
+            Share code: {groupId}
+          </p>
+
         </div>
       </div>
 

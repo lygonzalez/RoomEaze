@@ -55,7 +55,7 @@
   }
   
   .navbar-links li a:hover {
-    color: #FED4C1; /* soft peach or your accent color */
+    color: #468da1; /* soft peach or your accent color */
   }
 
   .navbar-links li:last-child {
@@ -81,7 +81,7 @@
   }
   
   .logout-button:hover {
-    background-color: #FED4C1;
+    background-color: #468da1;
     color: white;
   }
   

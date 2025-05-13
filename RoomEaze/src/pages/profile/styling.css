@@ -88,4 +88,22 @@
     cursor: pointer;
   }
   
-  
+  .groupbutton {
+    width: 200px;
+    height: 40px;
+    background-color: #61AFBD;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top:0.5rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .groupbutton:hover {
+    background-color: #468da1;
+  }  

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { Navigate, useNavigate } from 'react-router-dom';
-import {useAuth}  from '../../authContext';
+import { useAuth } from '../../authContext';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
+// Styled components
 const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,7 +18,7 @@ const AuthContainer = styled.div`
   padding: 20px;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   background-color: #f5f5dc;
   padding: 30px;
   border-radius: 8px;
@@ -23,7 +26,7 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  height:50%;
+  height: 50%;
 `;
 
 const Title = styled.h2`
@@ -48,6 +51,7 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 1em;
+  margin-bottom: 10px;
 
   &:hover {
     background-color: #2e648b;
@@ -55,17 +59,16 @@ const Button = styled.button`
 `;
 
 const ErrorMessage = styled.p`
-  color:  #61AFBD;
+  color: #61AFBD;
   margin-top: 10px;
 `;
 
 const SignupPage = () => {
-  console.log('SignupPage is rendering');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const {userLoggedIn} = useAuth()
+  const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -74,14 +77,39 @@ const SignupPage = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+
       await updateProfile(user, { displayName: name });
+
       await setDoc(doc(db, 'users', user.uid), {
         uid: user.uid,
         name: name,
         email: email,
-        groupId: null,  // We'll add this later
+        groupId: null,
         createdAt: new Date()
       });
+
+      navigate('/openingscreen');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignUp = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        name: user.displayName || 'Google User',
+        email: user.email,
+        groupId: null,
+        createdAt: new Date()
+      });
+
       navigate('/openingscreen');
     } catch (error) {
       setError(error.message);
@@ -115,6 +143,9 @@ const SignupPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit">Sign Up</Button>
+        <Button type="button" onClick={handleGoogleSignUp}>
+          Sign Up with Google
+        </Button>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <p style={{ marginTop: '10px', textAlign: 'center', fontSize: '0.9em', color: '#555' }}>
           Already have an account? <a href="/signin" style={{ color: '#4682b4' }}>Sign In</a>
@@ -125,4 +156,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-

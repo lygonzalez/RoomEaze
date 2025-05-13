@@ -117,7 +117,10 @@ const editProfile = () => {
         value={joinCode}
         onChange={(e) => setJoinCode(e.target.value)}
       />
-      <button onClick={handleJoinGroup}>Join Group</button>
+      <div> </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+        <button className = "groupbutton" onClick={handleJoinGroup}>Join Group</button>
+      </div>
     </div>
 
     <div style={{ marginTop: "1rem" }}>
@@ -128,7 +131,10 @@ const editProfile = () => {
         value={newGroupName}
         onChange={(e) => setNewGroupName(e.target.value)}
       />
-      <button onClick={handleCreateGroup}>Create Group</button>
+      <div> </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+        <button className = "groupbutton" onClick={handleCreateGroup}>Create Group</button>
+      </div>
     </div>
 
     {error && <p style={{ color: "red" }}>{error}</p>}
