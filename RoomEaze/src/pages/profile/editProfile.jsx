@@ -28,6 +28,7 @@ const editProfile = () => {
   const [newGroupName, setNewGroupName] = useState('');
   const [error, setError] = useState('');
   const [groupMembers, setGroupMembers] = useState([]);
+  const [image, setImage] = useState([]);
 
   const user = auth.currentUser;
   const navigate = useNavigate();
@@ -123,8 +124,17 @@ const editProfile = () => {
       <h1>Edit Profile</h1>
       <div className="edit-fields">
         <div>
+          <div>
+            <h2>Change Profile Image</h2>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+
+          </div>
           <h2>Change Name</h2>
-          <input
+          <input 
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
