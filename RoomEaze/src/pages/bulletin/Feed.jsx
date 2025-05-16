@@ -1,29 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase"; // adjust path as needed
+import { collection, query, orderBy, onSnapshot, limit} from "firebase/firestore";
+import { db } from "../../firebase";
 import Post from "./Post";
 import styles from "./Bulletin.module.css";
+
+
 
 const Feed = ({ groupId }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if (!groupId) return;
+    console.log("useEffect triggered. groupId:", groupId);
+    if (!groupId) {
+      console.warn("No groupId provided — skipping Firestore query.");
+      return;
+    }
 
     const q = query(
       collection(db, "groups", groupId, "messages"),
-      orderBy("timestamp", "desc")
+      orderBy("timestamp", "desc"),
+    );
+    console.log("Firestore query created:", q);
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        console.log("📥 onSnapshot triggered. Docs count:", snapshot.docs.length);
+        const messages = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          console.log("➡️ Doc:", doc.id, data);
+          return {
+            id: doc.id,
+            ...data,
+          };
+        });
+
+        setPosts(messages);
+        console.log("✅ State updated with", messages.length, "messages");
+      },
+      (error) => {
+        console.error("🔥 Firestore onSnapshot error:", error);
+      }
     );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const messages = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setPosts(messages);
-    });
-
-    return () => unsubscribe();
+    return () => {
+      console.log("🧹 Cleaning up snapshot listener");
+      unsubscribe();
+    };
   }, [groupId]);
 
   return (
@@ -31,12 +54,14 @@ const Feed = ({ groupId }) => {
       {posts.map((post, index) => (
         <React.Fragment key={post.id}>
           <Post
-            pfp="" // You can fetch and pass pfp if available
-            name={post.author || "Anonymous"} // Adjust based on Firestore schema
-            time={post.timestamp?.toDate().toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            }) || "Just now"}
+            pfp=""
+            name={post.author || "Anonymous"}
+            time={
+              post.timestamp?.toDate().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              }) || "Just now"
+            }
             message={post.message}
           />
           {index !== posts.length - 1 && (

@@ -23,7 +23,7 @@ function Navbar() {
       </div>
       <ul className="navbar-links">
         <li><Link to="/profile">Profile</Link></li>
-        <li><Link to="/bulletin">Bulletin</Link></li>
+        <li><Link to="/bulletin">Feed</Link></li>
         <li><Link to="/calender/scheduler">Schedule</Link></li>
         <li><Link to="/todolist/todo">To-Do List</Link></li>
         {userLoggedIn ? (
