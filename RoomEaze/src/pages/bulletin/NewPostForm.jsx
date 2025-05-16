@@ -8,31 +8,44 @@ import {
   onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore';
-import './Bulletin.module.css'; // Make sure this file includes the provided CSS or is imported globally
+import styles from './Bulletin.module.css'; 
+import { auth } from '../../firebase';
+
 
 const NewPostForm = ({ groupId }) => {
   const [inputValue, setInputValue] = useState('');
   const [category, setCategory] = useState('');
   const [posts, setPosts] = useState([]);
+  
 
   useEffect(() => {
-    const q = query(collection(db, 'posts'), orderBy('timestamp', 'desc'));
+    if (!groupId) return;
+
+    const q = query(
+      collection(db, 'groups', groupId, 'messages'),
+      orderBy('timestamp', 'desc')
+    );
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setPosts(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [groupId]);
+
 
   const handleSubmit = async (e) => {
+    const user = auth.currentUser;
     e.preventDefault();
     if (inputValue.trim() === '' || category === '' || !groupId) return;
 
     try {
-      await addDoc(collection(db, "groups", groupId, "messages"), {
+      await addDoc(collection(db, 'groups', groupId, 'messages'),
+      {
         message: inputValue,
         category,
-        timestamp: serverTimestamp()
+        timestamp: serverTimestamp(),
+        author: user.displayName || user.email || user.uid,
       });
       setInputValue('');
       setCategory('');
@@ -45,6 +58,7 @@ const NewPostForm = ({ groupId }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <h2>New Post</h2>
+        {/* <h1>{groupId ? `Group ID: ${groupId}` : 'No group ID provided'}</h1> */}
         <textarea
           placeholder="Type your message here..."
           value={inputValue}
@@ -61,8 +75,8 @@ const NewPostForm = ({ groupId }) => {
           }}
         />
         <h3>Categories</h3>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+          <label style={{ width: '45%' }}>
             <input
               type="radio"
               name="option"
@@ -71,8 +85,7 @@ const NewPostForm = ({ groupId }) => {
               onChange={(e) => setCategory(e.target.value)}
             /> Request
           </label>
-          <br />
-          <label>
+          <label style={{ width: '45%' }}>
             <input
               type="radio"
               name="option"
@@ -81,8 +94,7 @@ const NewPostForm = ({ groupId }) => {
               onChange={(e) => setCategory(e.target.value)}
             /> Reminder
           </label>
-          <br />
-          <label>
+          <label style={{ width: '45%' }}>
             <input
               type="radio"
               name="option"
@@ -91,8 +103,7 @@ const NewPostForm = ({ groupId }) => {
               onChange={(e) => setCategory(e.target.value)}
             /> Notice
           </label>
-          <br />
-          <label>
+          <label style={{ width: '45%' }}>
             <input
               type="radio"
               name="option"
@@ -102,9 +113,12 @@ const NewPostForm = ({ groupId }) => {
             /> Random
           </label>
         </div>
-        <button type="submit" className="dashboard-post-button">
-          Post
-        </button>
+
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button type="submit" className={styles["post-button"]} >
+              Send
+            </button>
+        </div>
       </form>
     </div>
   );
